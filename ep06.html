@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>EP06 · 相机与手机稳定器 · 拍摄器材指南</title><style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0b0b0d;--card-bg:#141418;--accent:#f59e0b;--accent-glow:rgba(245,158,11,0.08);--accent-light:#fcd34d;--text:#e4e4ed;--text-muted:#8b8b96;--text-dim:#5c5c66;--border:rgba(255,255,255,0.07);--radius:12px;--font-sans:"Inter","Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.78;font-size:16px}
+  body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");background-size:256px}
+  .ambient{position:fixed;border-radius:50%;filter:blur(140px);opacity:.04;pointer-events:none}
+  .ambient-1{width:600px;height:600px;background:var(--accent);top:-150px;right:-150px}
+  .ambient-2{width:400px;height:400px;background:#d946ef;bottom:-80px;left:-80px}
+  .container{max-width:920px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;padding:48px 0 16px}
+  .nav-back{color:var(--text-muted);text-decoration:none;font-size:13px;transition:color .2s}.nav-back:hover{color:var(--text)}
+  .nav-btn{color:var(--text-dim);text-decoration:none;font-size:12px;padding:6px 14px;border-radius:8px;border:1px solid var(--border);transition:all .2s}
+  .nav-btn:hover{border-color:rgba(255,255,255,.18);color:var(--text-muted)}
+  .hero{padding:32px 0 8px}
+  .hero-kicker{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--text-muted);margin-bottom:16px}
+  .hero h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin-bottom:8px}
+  .hero .sub{font-size:19px;color:var(--text-muted);font-weight:500;margin-bottom:16px}
+  .hero .desc{font-size:15px;color:var(--text-dim);max-width:640px;line-height:1.7}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .hero-tags .t{font-size:11px;color:var(--text-dim);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:3px 10px;border-radius:6px}
+  .hr{border:none;border-top:1px solid var(--border);margin:44px 0}
+  .sec-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px}
+  .sec-label.alt{font-size:10px;color:var(--accent-light);margin-bottom:6px}
+  .insight{background:linear-gradient(135deg,rgba(245,158,11,.06) 0%,rgba(217,70,239,.04) 100%);border:1px solid rgba(245,158,11,.1);border-radius:var(--radius);padding:26px 30px;margin:36px 0}
+  .insight-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-light);margin-bottom:10px}
+  .insight h2{font-size:18px;font-weight:700;line-height:1.4;color:var(--text);margin-bottom:6px}
+  .insight p{font-size:14px;color:var(--text-muted);line-height:1.6}
+  .sec h2{font-size:20px;font-weight:700;letter-spacing:-.01em;margin-bottom:18px;color:var(--text);line-height:1.3}
+  .sec p{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:12px}
+  .sec p strong{color:var(--text);font-weight:600}
+  .kw-row{font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:18px}
+  .kw-row strong{color:var(--text);font-weight:600}
+  .col3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+  @media(max-width:680px){.col3{grid-template-columns:1fr}}
+  .col3-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:22px 18px}
+  .col3-item h4{font-size:14px;font-weight:700;color:var(--accent-light);margin-bottom:8px}
+  .col3-item p{font-size:13px;color:var(--text-muted);line-height:1.55}
+  .img-full{width:100%;border-radius:10px;margin:20px 0;border:1px solid var(--border)}
+  .img-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+  @media(max-width:640px){.img-row{grid-template-columns:1fr}}
+  .img-row img{width:100%;border-radius:10px;border:1px solid var(--border)}
+  .img-cap{font-size:12px;color:var(--text-dim);text-align:center;margin-top:6px}
+  .refs{font-size:12px;color:var(--text-dim);margin-top:8px;font-style:italic}
+  .topic{margin:18px 0}
+  .topic-num{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--text-dim);margin-bottom:4px}
+  .topic h3{font-size:17px;font-weight:700;color:var(--text);margin-bottom:6px}
+  .topic p{font-size:14px;color:var(--text-muted);line-height:1.65}
+  .practice{margin:36px 0}
+  .practice .sec-label{margin-bottom:8px}
+  .practice-txt{font-size:14px;color:var(--text-muted);line-height:1.6;font-style:italic}
+  .cta-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:36px 0 48px}
+  @media(max-width:600px){.cta-row{grid-template-columns:1fr}}
+  .cta-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:18px 20px;text-decoration:none;color:inherit;display:block;transition:all .3s}
+  .cta-card:hover{border-color:rgba(255,255,255,.15)}
+  .cta-card h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+  .cta-card p{font-size:12px;color:var(--text-dim);line-height:1.5}
+  .takeaway{margin:40px 0;padding:28px 0;border-top:1px solid var(--border)}
+  .takeaway .sec-label{margin-bottom:10px}
+  .takeaway-text{font-size:18px;font-weight:700;line-height:1.4;color:var(--text);max-width:600px}
+  .takeaway-desc{font-size:14px;color:var(--text-muted);line-height:1.6;margin-top:8px}
+  .site-footer{text-align:center;padding:40px 0 20px;color:var(--text-dim);font-size:12px;border-top:1px solid var(--border)}
+  ::selection{background:rgba(245,158,11,.3);color:#fff}
+  @media(max-width:600px){.container{padding:0 18px}.hero h1{font-size:24px}.sec h2{font-size:17px}}
+</style></head><body><div class="ambient ambient-1"></div><div class="ambient ambient-2"></div><main><div class="container">
+<div class="nav-bar"><a href="index.html" class="nav-back">← 课程列表</a><a href="ep05.html" class="nav-btn">← EP05</a><a href="ep07.html" class="nav-btn">EP07 →</a></div>
+<div class="hero">
+<div class="hero-kicker">拍摄器材与参数指南 · 第 06 期 · 拍摄辅助器材</div>
+<h1>相机与手机稳定器</h1>
+<div class="sub">手持拍摄 · 运动跟拍</div>
+<p class="desc">稳定器能消除手持拍摄的抖动，让运动镜头丝滑流畅，是视频创作者最常用的辅助设备。</p>
+<div class="hero-tags"><span class="t">稳定器</span><span class="t">云台</span><span class="t">运动</span></div>
+</div>
+<div class="hr"></div>
+<div class="insight">
+<div class="insight-label">关键洞察</div>
+<h2>稳定器让你从【拍得到】变成【拍得美】</h2>
+<p>三轴机械防抖，即使走动拍摄也能保持画面平稳——这是机身防抖和电子防抖都做不到的。</p>
+</div><div class="hr"></div><div class="sec"><div class="sec-label">拍摄辅助器材</div><h2>相机与手机稳定器</h2><p><strong>相机与手机稳定器</strong></p><div class="img-row"><img src="img/slide28_3.jpg" loading="lazy"><img src="img/slide28_4.jpg" loading="lazy"></div><div class="img-cap">相机稳定器 · 手机稳定器</div><p>三轴稳定器通过三个电机（俯仰轴、横滚轴、航向轴）实时补偿手持产生的抖动。它的价值不仅在于消除抖动，更在于赋予你丰富的运镜可能：推、拉、摇、移、跟，每一种运镜都能讲述不同的故事。</p><div class="kw-row"><strong>适用设备</strong>微单相机 / 手机 · <strong>核心能力</strong>机械防抖 / 创意运镜 / 追踪拍摄 · <strong>代表品牌</strong>大疆 Ronin / 智云</div></div><div class="hr"></div>
+<div class="sec">
+<div class="sec-label">本节目标</div>
+<h2>学完本节，你将能够</h2>
+<div class="topic"><div class="topic-num">话题 01</div><h3>理解三轴稳定器的工作原理</h3><p>俯仰轴、横滚轴、航向轴如何协同工作，抵消三个方向的手部抖动。</p></div><div class="topic"><div class="topic-num">话题 02</div><h3>掌握基本的稳定器运镜技巧</h3><p>推拉摇移跟——五种基础运镜方式，每种适合什么场景。</p></div><div class="topic"><div class="topic-num">话题 03</div><h3>根据设备选择合适的稳定器</h3><p>微单需要更大的承重，手机稳定器则更轻便，按需选择。</p></div>
+</div>
+<div class="practice">
+<div class="sec-label alt">动手试试</div>
+<p class="practice-txt">尝试拍摄一段走动中的视频，对比手持vs稳定器的画面差异。</p>
+</div>
+<div class="takeaway">
+<div class="sec-label">总结</div>
+<div class="takeaway-text">稳定器给你的不只有稳定，还有运镜的自由</div>
+<div class="takeaway-desc">当画面不再抖动，你的注意力就可以放在构图、节奏和故事上了。</div>
+</div>
+<div class="cta-row">
+<a href="index.html" class="cta-card"><h4>← 返回课程列表</h4><p>浏览全部 19 节课程</p></a>
+<a href="#" class="cta-card" style="opacity:0.5;pointer-events:none"><h4>课程资料下载</h4><p>上线后提供课件和示例</p></a>
+</div>
+<footer class="site-footer">拍摄器材与参数指南 · 共 19 期 · EP06</footer>
+</div></main></body></html>

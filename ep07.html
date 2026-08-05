@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>EP07 · 灯光照明设备 · 拍摄器材指南</title><style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0b0b0d;--card-bg:#141418;--accent:#f59e0b;--accent-glow:rgba(245,158,11,0.08);--accent-light:#fcd34d;--text:#e4e4ed;--text-muted:#8b8b96;--text-dim:#5c5c66;--border:rgba(255,255,255,0.07);--radius:12px;--font-sans:"Inter","Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.78;font-size:16px}
+  body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");background-size:256px}
+  .ambient{position:fixed;border-radius:50%;filter:blur(140px);opacity:.04;pointer-events:none}
+  .ambient-1{width:600px;height:600px;background:var(--accent);top:-150px;right:-150px}
+  .ambient-2{width:400px;height:400px;background:#d946ef;bottom:-80px;left:-80px}
+  .container{max-width:920px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;padding:48px 0 16px}
+  .nav-back{color:var(--text-muted);text-decoration:none;font-size:13px;transition:color .2s}.nav-back:hover{color:var(--text)}
+  .nav-btn{color:var(--text-dim);text-decoration:none;font-size:12px;padding:6px 14px;border-radius:8px;border:1px solid var(--border);transition:all .2s}
+  .nav-btn:hover{border-color:rgba(255,255,255,.18);color:var(--text-muted)}
+  .hero{padding:32px 0 8px}
+  .hero-kicker{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--text-muted);margin-bottom:16px}
+  .hero h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin-bottom:8px}
+  .hero .sub{font-size:19px;color:var(--text-muted);font-weight:500;margin-bottom:16px}
+  .hero .desc{font-size:15px;color:var(--text-dim);max-width:640px;line-height:1.7}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .hero-tags .t{font-size:11px;color:var(--text-dim);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:3px 10px;border-radius:6px}
+  .hr{border:none;border-top:1px solid var(--border);margin:44px 0}
+  .sec-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px}
+  .sec-label.alt{font-size:10px;color:var(--accent-light);margin-bottom:6px}
+  .insight{background:linear-gradient(135deg,rgba(245,158,11,.06) 0%,rgba(217,70,239,.04) 100%);border:1px solid rgba(245,158,11,.1);border-radius:var(--radius);padding:26px 30px;margin:36px 0}
+  .insight-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-light);margin-bottom:10px}
+  .insight h2{font-size:18px;font-weight:700;line-height:1.4;color:var(--text);margin-bottom:6px}
+  .insight p{font-size:14px;color:var(--text-muted);line-height:1.6}
+  .sec h2{font-size:20px;font-weight:700;letter-spacing:-.01em;margin-bottom:18px;color:var(--text);line-height:1.3}
+  .sec p{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:12px}
+  .sec p strong{color:var(--text);font-weight:600}
+  .kw-row{font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:18px}
+  .kw-row strong{color:var(--text);font-weight:600}
+  .col3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+  @media(max-width:680px){.col3{grid-template-columns:1fr}}
+  .col3-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:22px 18px}
+  .col3-item h4{font-size:14px;font-weight:700;color:var(--accent-light);margin-bottom:8px}
+  .col3-item p{font-size:13px;color:var(--text-muted);line-height:1.55}
+  .img-full{width:100%;border-radius:10px;margin:20px 0;border:1px solid var(--border)}
+  .img-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+  @media(max-width:640px){.img-row{grid-template-columns:1fr}}
+  .img-row img{width:100%;border-radius:10px;border:1px solid var(--border)}
+  .img-cap{font-size:12px;color:var(--text-dim);text-align:center;margin-top:6px}
+  .refs{font-size:12px;color:var(--text-dim);margin-top:8px;font-style:italic}
+  .topic{margin:18px 0}
+  .topic-num{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--text-dim);margin-bottom:4px}
+  .topic h3{font-size:17px;font-weight:700;color:var(--text);margin-bottom:6px}
+  .topic p{font-size:14px;color:var(--text-muted);line-height:1.65}
+  .practice{margin:36px 0}
+  .practice .sec-label{margin-bottom:8px}
+  .practice-txt{font-size:14px;color:var(--text-muted);line-height:1.6;font-style:italic}
+  .cta-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:36px 0 48px}
+  @media(max-width:600px){.cta-row{grid-template-columns:1fr}}
+  .cta-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:18px 20px;text-decoration:none;color:inherit;display:block;transition:all .3s}
+  .cta-card:hover{border-color:rgba(255,255,255,.15)}
+  .cta-card h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+  .cta-card p{font-size:12px;color:var(--text-dim);line-height:1.5}
+  .takeaway{margin:40px 0;padding:28px 0;border-top:1px solid var(--border)}
+  .takeaway .sec-label{margin-bottom:10px}
+  .takeaway-text{font-size:18px;font-weight:700;line-height:1.4;color:var(--text);max-width:600px}
+  .takeaway-desc{font-size:14px;color:var(--text-muted);line-height:1.6;margin-top:8px}
+  .site-footer{text-align:center;padding:40px 0 20px;color:var(--text-dim);font-size:12px;border-top:1px solid var(--border)}
+  ::selection{background:rgba(245,158,11,.3);color:#fff}
+  @media(max-width:600px){.container{padding:0 18px}.hero h1{font-size:24px}.sec h2{font-size:17px}}
+</style></head><body><div class="ambient ambient-1"></div><div class="ambient ambient-2"></div><main><div class="container">
+<div class="nav-bar"><a href="index.html" class="nav-back">← 课程列表</a><a href="ep06.html" class="nav-btn">← EP06</a><a href="ep08.html" class="nav-btn">EP08 →</a></div>
+<div class="hero">
+<div class="hero-kicker">拍摄器材与参数指南 · 第 07 期 · 拍摄辅助器材</div>
+<h1>灯光照明设备</h1>
+<div class="sub">常亮灯 · LED补光灯 · RGB灯棒</div>
+<p class="desc">光线是影像的灵魂。一套合理的灯光配置能让画面质感提升几个档次。</p>
+<div class="hero-tags"><span class="t">灯光</span><span class="t">LED</span><span class="t">布光</span></div>
+</div>
+<div class="hr"></div>
+<div class="insight">
+<div class="insight-label">关键洞察</div>
+<h2>好的灯光不是让画面更亮，是让画面更有层次</h2>
+<p>灯光不是亮度问题，是质感问题。主光、辅光、轮廓光——三盏灯能讲出完全不同的故事。</p>
+</div><div class="hr"></div><div class="sec"><div class="sec-label">拍摄辅助器材</div><h2>灯光照明设备</h2><p><strong>灯光是影像的灵魂</strong></p><p>一段视频好坏，70% 取决于光线。从影棚级常亮灯到口袋 RGB 补光灯，每一种灯都有它的位置。</p><div class="img-row"><img src="img/slide29_2.png" loading="lazy"><img src="img/slide30_3.png" loading="lazy"></div><div class="img-cap">影棚常亮灯（Nanlite Forza 60w / SmallRig RC120）· 平板 LED 补光灯</div><p><strong>影棚常亮灯</strong> — 大功率 COB LED，配柔光罩和格栅，用于主光源布光。南光 Forza 60w / SmallRig RC120 是性价比之选。</p><p><strong>平板 LED 补光灯</strong> — 双色温可调亮度，轻便灵活，适合辅助光和填充光。</p><div class="img-row"><img src="img/slide31_3.png" loading="lazy"><img src="img/slide32_3.png" loading="lazy"></div><div class="img-cap">RGB 全彩灯棒（曼比利 LS-260RGB）· 口袋 RGB 补光灯（SmallRig）</div><p><strong>RGB 灯棒</strong> — 全彩可调，氛围照明神器，适合创意布光和背景染色。</p><p><strong>口袋补光灯</strong> — SmallRig 等品牌，超便携，多灯组合效果更佳。</p><div class="col3"><div class="col3-item"><h4>单灯方案</h4><p>1 个常亮灯 + 柔光罩，正面或侧面打光，最基础的布光。</p></div><div class="col3-item"><h4>双灯方案</h4><p>主灯 + 补光灯，经典的主辅光布局，消除面部阴影。</p></div><div class="col3-item"><h4>三灯方案</h4><p>主灯 + 补光灯 + 轮廓灯，经典三点布光，最有层次感。</p></div></div></div><div class="hr"></div>
+<div class="sec">
+<div class="sec-label">本节目标</div>
+<h2>学完本节，你将能够</h2>
+<div class="topic"><div class="topic-num">话题 01</div><h3>了解不同类型灯光的特点和用途</h3><p>常亮灯提供稳定主光，LED 补光灯灵活补光，RGB 灯棒营造氛围。</p></div><div class="topic"><div class="topic-num">话题 02</div><h3>掌握基本的三点布光法</h3><p>主光（塑造主体）、辅光（减少阴影）、轮廓光（分离背景）——经典布光公式。</p></div><div class="topic"><div class="topic-num">话题 03</div><h3>根据拍摄场景选择合适的灯光</h3><p>访谈用双灯，产品展示用三灯，户外 Vlog 用口袋补光灯。</p></div>
+</div>
+<div class="practice">
+<div class="sec-label alt">动手试试</div>
+<p class="practice-txt">用台灯和自然光尝试在家搭建一个简单的双灯布光场景。</p>
+</div>
+<div class="takeaway">
+<div class="sec-label">总结</div>
+<div class="takeaway-text">打光不是技术，是对光影的理解</div>
+<div class="takeaway-desc">最好的布光效果不是'看起来打了很多灯'，而是'看不出打了灯但画面很舒服'。</div>
+</div>
+<div class="cta-row">
+<a href="index.html" class="cta-card"><h4>← 返回课程列表</h4><p>浏览全部 19 节课程</p></a>
+<a href="#" class="cta-card" style="opacity:0.5;pointer-events:none"><h4>课程资料下载</h4><p>上线后提供课件和示例</p></a>
+</div>
+<footer class="site-footer">拍摄器材与参数指南 · 共 19 期 · EP07</footer>
+</div></main></body></html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP07 - 数据分析 · WorkBuddy 使用指南</title>
+<style>  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0b0b0d; --card-bg: #141418; --accent: #6366f1;
+    --accent-glow: rgba(99,102,241,0.12); --accent-light: #a5b4fc;
+    --text: #e4e4ed; --text-muted: #8b8b96; --text-dim: #5c5c66;
+    --border: rgba(255,255,255,0.07); --border-light: rgba(255,255,255,0.04);
+    --radius: 14px; --radius-sm: 10px;
+    --font-sans: "Inter","Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --font-mono: "JetBrains Mono","Fira Code",monospace;
+    --max-w: 960px;
+  }
+  body {
+    font-family: var(--font-sans); background: var(--bg); color: var(--text);
+    min-height: 100vh; -webkit-font-smoothing: antialiased; line-height: 1.75; font-size: 16px;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 256px;
+  }
+  .ambient {
+    position: fixed; border-radius: 50%; filter: blur(140px); opacity: 0.05; pointer-events: none;
+  }
+  .ambient-1 { width: 600px; height: 600px; background: var(--accent); top: -150px; right: -150px; }
+  .ambient-2 { width: 400px; height: 400px; background: #a855f7; bottom: -80px; left: -80px; }
+
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+
+  /* --- Navigation --- */
+  .nav-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 48px 0 16px; gap: 16px;
+  }
+  .nav-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--text); }
+  .nav-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    color: var(--text-dim); text-decoration: none; font-size: 12px;
+    padding: 6px 14px; border-radius: 8px;
+    border: 1px solid var(--border); transition: all 0.2s;
+  }
+  .nav-btn:hover { border-color: rgba(255,255,255,0.18); color: var(--text-muted); }
+
+  /* --- Hero --- */
+  .hero { padding: 20px 0 20px; }
+  .hero-kicker {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+    color: var(--text-muted); margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 5.5vw, 48px); font-weight: 800;
+    letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 8px;
+  }
+  .hero .sub {
+    font-size: 20px; color: var(--text-muted); font-weight: 500; margin-bottom: 16px;
+  }
+  .hero .desc {
+    font-size: 15px; color: var(--text-dim); max-width: 680px; line-height: 1.7;
+  }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .tag {
+    font-size: 11px; color: var(--text-dim); background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px;
+  }
+
+  /* --- Divider --- */
+  .divider {
+    border: none; border-top: 1px solid var(--border); margin: 40px 0;
+  }
+
+  /* --- Section --- */
+  .section { margin-bottom: 52px; }
+  .section-label {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .section h2 {
+    font-size: 22px; font-weight: 700; letter-spacing: -0.01em;
+    margin-bottom: 20px; color: var(--text);
+  }
+
+  /* --- Paragraph list --- */
+  .para-list { display: flex; flex-direction: column; gap: 12px; }
+  .para-item {
+    font-size: 15px; line-height: 1.7; color: var(--text-muted);
+    padding-left: 0;
+  }
+  .para-item strong { color: var(--text); font-weight: 600; }
+
+  /* --- Column grid --- */
+  .col-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  }
+  @media (max-width: 680px) { .col-grid { grid-template-columns: 1fr; } }
+
+  .col-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 22px 20px;
+    transition: border-color 0.3s;
+  }
+  .col-card:hover { border-color: rgba(255,255,255,0.12); }
+  .col-card .col-title {
+    font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px;
+  }
+  .col-card .col-desc {
+    font-size: 13px; color: var(--text-dim); line-height: 1.6;
+  }
+
+  /* --- Insight block --- */
+  .insight-block {
+    background: linear-gradient(135deg, rgba(99,102,241,0.06) 0%, rgba(139,92,246,0.04) 100%);
+    border: 1px solid rgba(99,102,241,0.12); border-radius: var(--radius);
+    padding: 28px 32px; margin: 36px 0;
+  }
+  .insight-block .insight-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent-light); margin-bottom: 10px;
+  }
+  .insight-block .insight-text {
+    font-size: 17px; font-weight: 600; line-height: 1.5; color: var(--text);
+  }
+
+  /* --- Learnings (numbered) --- */
+  .learn-list { counter-reset: learn; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .learn-item {
+    font-size: 15px; color: var(--text-muted); counter-increment: learn;
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 12px 0; border-bottom: 1px solid var(--border-light);
+  }
+  .learn-item::before {
+    content: "0" counter(learn);
+    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+    color: var(--accent-light); flex-shrink: 0; width: 24px; opacity: 0.7;
+  }
+
+  /* --- Practice --- */
+  .practice-block {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 26px 30px; margin-top: 36px;
+  }
+  .practice-block .practice-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent-light); margin-bottom: 8px;
+  }
+  .practice-block .practice-text {
+    font-size: 14px; color: var(--text-muted); line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* --- CTA cards --- */
+  .cta-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 32px; }
+  @media (max-width: 600px) { .cta-row { grid-template-columns: 1fr; } }
+  .cta-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 20px 22px;
+    text-decoration: none; color: inherit; display: block;
+    transition: all 0.3s;
+  }
+  .cta-card:hover { border-color: rgba(255,255,255,0.15); }
+  .cta-card .cta-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .cta-card .cta-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+  /* --- Footer --- */
+  .site-footer {
+    text-align: center; padding: 48px 0 40px; color: var(--text-dim);
+    font-size: 12px; border-top: 1px solid var(--border); margin-top: 40px;
+  }
+  .site-footer .domain { font-size: 12px; color: var(--text-dim); margin-bottom: 6px; }
+  .site-footer .series { font-size: 12px; color: var(--text-dim); opacity: 0.6; }
+
+  ::selection { background: rgba(99,102,241,0.3); color: #fff; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 3px; }
+
+  @media (max-width: 600px) {
+    .container { padding: 0 20px; }
+    .hero h1 { font-size: 26px; }
+    .insight-block { padding: 20px 22px; }
+    .insight-block .insight-text { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+<div class="ambient ambient-1"></div>
+<div class="ambient ambient-2"></div>
+
+<main class="container">
+  <div class="nav-bar">
+    <a href="index.html" class="nav-back">← 课程列表</a>
+    <a href="ep06.html" class="nav-btn">← EP06</a><a href="ep08.html" class="nav-btn">EP08 →</a>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-kicker">WorkBuddy 使用指南 · 第 07 期</div>
+    <h1>数据分析</h1>
+    <div class="sub">用 AI 读懂你的数据</div>
+    <p class="desc">把 CSV、Excel、JSON 丢给 WorkBuddy，它会自动清洗、分析、可视化，最后给你一份完整的数据洞察报告。不需要写一行 Python 或 SQL。</p>
+    <div class="hero-tags"><span class="tag">Excel/CSV</span><span class="tag">图表生成</span><span class="tag">数据洞察</span></div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Key Insight -->
+  <div class="insight-block">
+    <div class="insight-label">关键洞察</div>
+    <div class="insight-text">数据不会说话，但 AI 能帮你听到它想说什么。</div>
+  </div>
+
+  <!-- Content Sections -->
+  <div class="section"><div class="section-label">数据分析流程</div><div class="para-list"><div class="para-item"><strong>导入</strong> — 读取 CSV、Excel、JSON 等格式，自动识别列和类型</div>
+<div class="para-item"><strong>清洗</strong> — 处理缺失值、异常值、重复数据</div>
+<div class="para-item"><strong>分析</strong> — 描述统计、趋势分析、相关性分析</div>
+<div class="para-item"><strong>可视化</strong> — 自动生成柱状图、折线图、散点图等</div>
+<div class="para-item"><strong>报告</strong> — 整合分析结果，生成 Markdown 分析报告</div></div></div>
+
+
+  <hr class="divider">
+
+  <!-- What You'll Learn -->
+  <div class="section">
+    <div class="section-label">本节目标</div>
+    <h2>学完这节课，你将能够</h2>
+    <ol class="learn-list"><li class="learn-item">将 Excel/CSV 数据导入 WorkBuddy</li>
+<li class="learn-item">让 AI 完成数据清洗和预处理</li>
+<li class="learn-item">生成多种类型的可视化图表</li>
+<li class="learn-item">输出一份完整的数据分析报告</li></ol>
+  </div>
+
+  <!-- Practice -->
+  <div class="practice-block">
+    <div class="practice-label">动手试试</div>
+    <p class="practice-text">“找一份你手边的 Excel 或 CSV 文件，让 WorkBuddy 读它、分析关键指标、生成图表。看看 AI 能从你的数据中发现什么你想不到的洞察。”</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-row">
+    <a href="index.html" class="cta-card">
+      <div class="cta-title">← 返回课程列表</div>
+      <div class="cta-desc">浏览全部 16 期课程</div>
+    </a>
+    <a href="#" class="cta-card" style="opacity:0.5; pointer-events:none;">
+      <div class="cta-title">课程资料下载</div>
+      <div class="cta-desc">上线后提供课件和示例代码</div>
+    </a>
+  </div>
+
+  <footer class="site-footer">
+    <div class="domain">WorkBuddy 使用指南</div>
+    <div class="series">从入门到进阶 · 共 16 期 · EP07</div>
+  </footer>
+</main>
+</body>
+</html>

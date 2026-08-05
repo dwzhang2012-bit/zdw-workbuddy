@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拍摄器材与参数指南 · 课程专栏</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg: #0b0b0d; --card-bg: #141418; --accent: #f59e0b; --accent-glow: rgba(245,158,11,0.15); --text: #e4e4ed; --text-muted: #8b8b96; --text-dim: #5c5c66; --border: rgba(255,255,255,0.06); --radius: 16px; --font-sans: "Inter","Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; --font-mono: "JetBrains Mono",monospace; }
+  body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+  body::before { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-size: 256px; }
+  .ambient { position: fixed; border-radius: 50%; filter: blur(120px); opacity: 0.06; pointer-events: none; }
+  .ambient-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -100px; }
+  .ambient-2 { width: 400px; height: 400px; background: #d946ef; bottom: -100px; right: -100px; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+  .header { padding: 100px 0 70px; text-align: center; }
+  .header-tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(245,158,11,0.2); padding: 6px 16px; border-radius: 100px; margin-bottom: 28px; }
+  .header h1 { font-size: clamp(32px, 5.5vw, 56px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 18px; background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .header .subtitle { font-size: 17px; color: var(--text-muted); max-width: 600px; margin: 0 auto 8px; line-height: 1.7; }
+  .header .meta { font-size: 13px; color: var(--text-dim); margin-top: 24px; display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .header .meta .dot { width: 4px; height: 4px; background: var(--text-dim); border-radius: 50%; }
+  .section-group { margin-bottom: 48px; }
+  .section-title { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .container { padding: 0 20px; } .header { padding: 60px 0 40px; } }
+  .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; position: relative; overflow: hidden; transition: all 0.35s cubic-bezier(0.25,0.1,0.25,1); cursor: pointer; text-decoration: none; color: inherit; display: block; }
+  .card:hover { transform: translateY(-4px); border-color: rgba(245,158,11,0.2); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .card::after { content: ''; position: absolute; top: -40%; right: -40%; width: 160px; height: 160px; background: radial-gradient(circle, rgba(245,158,11,0.04) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+  .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .card-num { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 0.04em; }
+  .card-title { font-size: 18px; font-weight: 700; line-height: 1.3; margin-bottom: 8px; position: relative; z-index: 1; }
+  .card-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; position: relative; z-index: 1; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; position: relative; z-index: 1; }
+  .tag { font-size: 11px; color: var(--text-dim); background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 5px; }
+  .card-arrow { position: absolute; bottom: 24px; right: 28px; font-size: 16px; color: var(--text-dim); opacity: 0; transform: translateX(-6px); transition: all 0.3s; z-index: 1; }
+  .card:hover .card-arrow { opacity: 1; transform: translateX(0); }
+  .site-footer { text-align: center; padding: 40px 0 60px; color: var(--text-dim); font-size: 12px; border-top: 1px solid var(--border); margin-top: 20px; }
+  ::selection { background: rgba(245,158,11,0.3); color: #fff; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .card { animation: fadeUp 0.5s ease-out backwards; }
+  .card:nth-child(1) { animation-delay: 0.03s; } .card:nth-child(2) { animation-delay: 0.06s; } .card:nth-child(3) { animation-delay: 0.09s; } .card:nth-child(4) { animation-delay: 0.12s; }
+  .card:nth-child(5) { animation-delay: 0.15s; } .card:nth-child(6) { animation-delay: 0.18s; } .card:nth-child(7) { animation-delay: 0.21s; } .card:nth-child(8) { animation-delay: 0.24s; }
+</style>
+</head>
+<body>
+<div class="ambient ambient-1"></div>
+<div class="ambient ambient-2"></div>
+<main class="container">
+  <header class="header">
+    <div class="header-tag">AIGC 赋能 · 短视频创作与教学实战</div>
+    <h1>拍摄器材与参数指南</h1>
+    <p class="subtitle">从影视广播级到家用手机，系统掌握拍摄器材的选择与核心参数。</p>
+    <p class="subtitle">山西省财政税务专科学校 · 第二阶段线下集训</p>
+    <div class="meta">
+      <span>📷 4 大章节</span><span class="dot"></span><span>📚 共 19 期</span><span class="dot"></span><span>🎬 讲师 · 张大为</span>
+    </div>
+  </header>
+
+  <!-- Section 1: 视频拍摄器材 -->
+  <div class="section-group">
+    <div class="section-title">01 · 视频拍摄器材</div>
+    <div class="grid">
+      <a class="card" href="ep01.html">
+        <div class="card-header"><span class="card-num">EP01</span></div>
+        <h3 class="card-title">影视广播级摄像机</h3>
+        <div class="card-sub">RED · ARRI 电影摄影机</div>
+        <div class="card-tags"><span class="tag">RED</span><span class="tag">ARRI</span><span class="tag">电影级</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep02.html">
+        <div class="card-header"><span class="card-num">EP02</span></div>
+        <h3 class="card-title">专业企业级 — 微单机身</h3>
+        <div class="card-sub">SONY 微单全系列解析</div>
+        <div class="card-tags"><span class="tag">SONY</span><span class="tag">微单</span><span class="tag">全画幅</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep03.html">
+        <div class="card-header"><span class="card-num">EP03</span></div>
+        <h3 class="card-title">专业企业级 — 微单镜头</h3>
+        <div class="card-sub">标准变焦 · 定焦 · 广角</div>
+        <div class="card-tags"><span class="tag">镜头</span><span class="tag">变焦</span><span class="tag">定焦</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep04.html">
+        <div class="card-header"><span class="card-num">EP04</span></div>
+        <h3 class="card-title">家用级拍摄设备</h3>
+        <div class="card-sub">Vlog相机 · 运动相机 · 手机</div>
+        <div class="card-tags"><span class="tag">Vlog</span><span class="tag">GoPro</span><span class="tag">DJI</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Section 2: 拍摄辅助器材 -->
+  <div class="section-group">
+    <div class="section-title">02 · 拍摄辅助器材</div>
+    <div class="grid">
+      <a class="card" href="ep05.html">
+        <div class="card-header"><span class="card-num">EP05</span></div>
+        <h3 class="card-title">三脚架与兔笼套装</h3>
+        <div class="card-sub">稳定支撑 · 拓展接口</div>
+        <div class="card-tags"><span class="tag">三脚架</span><span class="tag">兔笼</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep06.html">
+        <div class="card-header"><span class="card-num">EP06</span></div>
+        <h3 class="card-title">相机与手机稳定器</h3>
+        <div class="card-sub">手持拍摄 · 运动跟拍</div>
+        <div class="card-tags"><span class="tag">稳定器</span><span class="tag">手持云台</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep07.html">
+        <div class="card-header"><span class="card-num">EP07</span></div>
+        <h3 class="card-title">灯光照明设备</h3>
+        <div class="card-sub">常亮灯 · LED补光灯 · RGB灯棒</div>
+        <div class="card-tags"><span class="tag">灯光</span><span class="tag">LED</span><span class="tag">布光</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep08.html">
+        <div class="card-header"><span class="card-num">EP08</span></div>
+        <h3 class="card-title">录音话筒设备</h3>
+        <div class="card-sub">无线领夹 · 机顶麦克风</div>
+        <div class="card-tags"><span class="tag">录音</span><span class="tag">RODE</span><span class="tag">音频</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep09.html">
+        <div class="card-header"><span class="card-num">EP09</span></div>
+        <h3 class="card-title">无人机与其他器材</h3>
+        <div class="card-sub">航拍 · 反光板 · 绿幕</div>
+        <div class="card-tags"><span class="tag">无人机</span><span class="tag">DJI</span><span class="tag">反光板</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Section 3: 相机相关参数 -->
+  <div class="section-group">
+    <div class="section-title">03 · 相机相关参数</div>
+    <div class="grid">
+      <a class="card" href="ep10.html">
+        <div class="card-header"><span class="card-num">EP10</span></div>
+        <h3 class="card-title">快门速度</h3>
+        <div class="card-sub">控制曝光时间的核心参数</div>
+        <div class="card-tags"><span class="tag">快门</span><span class="tag">曝光</span><span class="tag">动态模糊</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep11.html">
+        <div class="card-header"><span class="card-num">EP11</span></div>
+        <h3 class="card-title">感光度 ISO</h3>
+        <div class="card-sub">相机对光线的敏感程度</div>
+        <div class="card-tags"><span class="tag">ISO</span><span class="tag">感光度</span><span class="tag">噪点</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep12.html">
+        <div class="card-header"><span class="card-num">EP12</span></div>
+        <h3 class="card-title">白平衡与色温</h3>
+        <div class="card-sub">让白色呈现真正的白色</div>
+        <div class="card-tags"><span class="tag">白平衡</span><span class="tag">色温</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep13.html">
+        <div class="card-header"><span class="card-num">EP13</span></div>
+        <h3 class="card-title">分辨率</h3>
+        <div class="card-sub">画面清晰度的量化指标</div>
+        <div class="card-tags"><span class="tag">分辨率</span><span class="tag">4K</span><span class="tag">像素</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep14.html">
+        <div class="card-header"><span class="card-num">EP14</span></div>
+        <h3 class="card-title">帧速率</h3>
+        <div class="card-sub">每秒记录画面的数量</div>
+        <div class="card-tags"><span class="tag">帧速率</span><span class="tag">升格</span><span class="tag">慢动作</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep15.html">
+        <div class="card-header"><span class="card-num">EP15</span></div>
+        <h3 class="card-title">曝光补偿</h3>
+        <div class="card-sub">微调画面亮度的快捷方式</div>
+        <div class="card-tags"><span class="tag">曝光</span><span class="tag">EV</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Section 4: 镜头相关参数 -->
+  <div class="section-group">
+    <div class="section-title">04 · 镜头相关参数</div>
+    <div class="grid">
+      <a class="card" href="ep16.html">
+        <div class="card-header"><span class="card-num">EP16</span></div>
+        <h3 class="card-title">光圈</h3>
+        <div class="card-sub">控制进光量与景深的核心</div>
+        <div class="card-tags"><span class="tag">光圈</span><span class="tag">景深</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep17.html">
+        <div class="card-header"><span class="card-num">EP17</span></div>
+        <h3 class="card-title">焦距</h3>
+        <div class="card-sub">决定视角与透视关系</div>
+        <div class="card-tags"><span class="tag">焦距</span><span class="tag">广角</span><span class="tag">长焦</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep18.html">
+        <div class="card-header"><span class="card-num">EP18</span></div>
+        <h3 class="card-title">对焦方式</h3>
+        <div class="card-sub">自动对焦 · 手动对焦</div>
+        <div class="card-tags"><span class="tag">对焦</span><span class="tag">AF</span><span class="tag">MF</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="ep19.html">
+        <div class="card-header"><span class="card-num">EP19</span></div>
+        <h3 class="card-title">防抖技术</h3>
+        <div class="card-sub">消除手抖的最后一道防线</div>
+        <div class="card-tags"><span class="tag">防抖</span><span class="tag">OSS</span><span class="tag">手持</span></div>
+        <span class="card-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <footer class="site-footer">拍摄器材与参数指南 · 山西省财政税务专科学校 · 2026</footer>
+</main>
+</body>
+</html>
